@@ -1,5 +1,13 @@
-import {IsDate, IsIn, IsNotEmpty, IsOptional, IsString, MaxLength, MinLength} from "class-validator";
-import {Transform} from "class-transformer";
+import {
+  IsDate,
+  IsIn,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class UpdatePlayerDto {
   @IsString()
