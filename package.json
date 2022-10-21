@@ -1,0 +1,21 @@
+{
+  "name": "soccer-players-catalog",
+  "version": "1.0.0",
+  "description": "Simple catalog to add soccer players, update them and show on the web-page",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && npm start && cd client && npm start",
+    "dev": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Handehoch/soccer-players-catalog.git"
+  },
+  "author": "Handehoch",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Handehoch/soccer-players-catalog/issues"
+  },
+  "homepage": "https://github.com/Handehoch/soccer-players-catalog#readme"
+}
