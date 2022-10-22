@@ -14,6 +14,7 @@ export class PlayersService {
       map((data) => {
         return (data as Player[]).map((value) => {
           return new Player(
+            value.id,
             value.firstname,
             value.lastname,
             value.sex,

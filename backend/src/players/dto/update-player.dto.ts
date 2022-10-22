@@ -24,6 +24,9 @@ export class UpdatePlayerDto {
   @MaxLength(32)
   lastname?: string;
 
+  // @IsOptional()
+  // avatar?: Buffer;
+
   @IsString()
   @IsNotEmpty()
   @IsOptional()

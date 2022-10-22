@@ -25,6 +25,12 @@ export class Player extends Model<Player, CreatePlayerDto> {
   @Column({ type: DataType.STRING, allowNull: false })
   lastname: string;
 
+  // @Column({
+  //   type: DataType.BLOB('long'),
+  //   allowNull: true,
+  // })
+  // avatar: Buffer;
+
   @Column({ type: DataType.STRING, allowNull: false })
   sex: string;
 

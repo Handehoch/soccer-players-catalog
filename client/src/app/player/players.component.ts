@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from './players.service';
+import { Observable } from 'rxjs';
 
 export class Player {
   constructor(
+    public id: number,
     public firstname: string,
     public lastname: string,
     public sex: 'мужской' | 'женский' | 'male' | 'female',
@@ -20,12 +22,10 @@ export class Player {
 export class PlayersComponent implements OnInit {
   constructor(private readonly playerService: PlayersService) {}
 
-  players: Player[] | undefined;
+  players$: Observable<Player[]> | undefined;
 
   async getPlayers() {
-    (await this.playerService.getPlayers()).subscribe(
-      (data) => (this.players = data)
-    );
+    this.players$ = await this.playerService.getPlayers();
   }
 
   async ngOnInit(): Promise<void> {

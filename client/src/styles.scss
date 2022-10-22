@@ -12,5 +12,5 @@ ul {
 
 .content-container {
   margin: 0 auto;
-  width: 1400px;
+  width: min(1400px, 100%);
 }
