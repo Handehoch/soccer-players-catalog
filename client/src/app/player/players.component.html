@@ -1,0 +1,24 @@
+<ul class="players">
+  <li class="players__item" *ngFor="let player of players">
+    <div class="players__card">
+      
+      <h2 class="players__name">Name: {{player.firstname}} {{player.lastname}}</h2>
+      <div class="players__description">
+        <ul class="players__info">
+          <li class="players__data">
+            <p class="players__sex">Sex: {{player.sex}}</p>
+          </li>
+          <li class="players__data">
+            <p class="players__birthday">Birthday: {{player.birthday | date}}</p>
+          </li>
+          <li class="players__data">
+            <p class="players__team">Team: {{player.teamName}}</p>
+          </li>
+          <li class="players__data">
+            <p class="players__country">Country: {{player.country}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</ul>
