@@ -24,9 +24,6 @@ export class UpdatePlayerDto {
   @MaxLength(32)
   lastname?: string;
 
-  // @IsOptional()
-  // avatar?: Buffer;
-
   @IsString()
   @IsNotEmpty()
   @IsOptional()
@@ -48,4 +45,9 @@ export class UpdatePlayerDto {
   @IsOptional()
   @IsNotEmpty()
   country?: string;
+
+  @IsOptional()
+  @IsNotEmpty()
+  @Transform((r) => parseInt(r.value))
+  avatarId?: number;
 }

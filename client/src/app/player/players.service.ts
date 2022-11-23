@@ -20,10 +20,17 @@ export class PlayersService {
             value.sex,
             value.birthday,
             value.teamName,
-            value.country
+            value.country,
+            value.avatarId
           );
         });
       })
+    );
+  }
+
+  async getAvatarByPlayerId(player: Player) {
+    return this.httpService.get(
+      `http://localhost:3030/api/players/${player.id}/avatar`
     );
   }
 }

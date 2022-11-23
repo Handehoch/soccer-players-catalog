@@ -1,5 +1,13 @@
-import { Column, DataType, Index, Model, Table } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  HasOne,
+  Index,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 import { CreatePlayerDto } from './dto/create-player.dto';
+import { File } from '../file/file.model';
 
 @Table({ tableName: 'players' })
 export class Player extends Model<Player, CreatePlayerDto> {
@@ -25,12 +33,6 @@ export class Player extends Model<Player, CreatePlayerDto> {
   @Column({ type: DataType.STRING, allowNull: false })
   lastname: string;
 
-  // @Column({
-  //   type: DataType.BLOB('long'),
-  //   allowNull: true,
-  // })
-  // avatar: Buffer;
-
   @Column({ type: DataType.STRING, allowNull: false })
   sex: string;
 
@@ -42,4 +44,10 @@ export class Player extends Model<Player, CreatePlayerDto> {
 
   @Column({ type: DataType.STRING, allowNull: false })
   country: string;
+
+  @HasOne(() => File, 'playerId')
+  avatar: File;
+
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  avatarId: number;
 }

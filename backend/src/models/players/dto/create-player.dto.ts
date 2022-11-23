@@ -21,9 +21,6 @@ export class CreatePlayerDto {
   @MaxLength(32)
   lastname: string;
 
-  // @IsOptional()
-  // avatar: Buffer;
-
   @IsString()
   @IsNotEmpty()
   @IsIn(['мужской', 'женский', 'male', 'female'])
