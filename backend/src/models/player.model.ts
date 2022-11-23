@@ -6,8 +6,8 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { CreatePlayerDto } from './dto/create-player.dto';
-import { File } from '../file/file.model';
+import { CreatePlayerDto } from '../modules/players/dto/create-player.dto';
+import { File } from './file.model';
 
 @Table({ tableName: 'players' })
 export class Player extends Model<Player, CreatePlayerDto> {

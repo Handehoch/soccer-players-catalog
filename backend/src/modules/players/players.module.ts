@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { PlayersController } from './players.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Player } from '../../models/players/player.model';
-import { File } from '../../models/file/file.model';
+import { Player } from '../../models/player.model';
+import { File } from '../../models/file.model';
 
 @Module({
   controllers: [PlayersController],

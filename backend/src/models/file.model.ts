@@ -1,5 +1,5 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
-import { CreateFileDto } from './dto/create-file.dto';
+import { CreateFileDto } from '../modules/files/dto/create-file.dto';
 
 @Table({ tableName: 'files', createdAt: false, updatedAt: false })
 export class File extends Model<File, CreateFileDto> {
@@ -21,6 +21,8 @@ export class File extends Model<File, CreateFileDto> {
   })
   data: Uint8Array;
 
-  @Column({ type: DataType.INTEGER })
+  @Column({
+    type: DataType.INTEGER,
+  })
   playerId: number;
 }

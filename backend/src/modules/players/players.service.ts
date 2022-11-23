@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { Player } from '../../models/players/player.model';
-import { CreatePlayerDto } from '../../models/players/dto/create-player.dto';
-import { UpdatePlayerDto } from '../../models/players/dto/update-player.dto';
-import { CreateFileDto } from '../../models/file/dto/create-file.dto';
-import { File } from '../../models/file/file.model';
+import { Player } from '../../models/player.model';
+import { CreatePlayerDto } from './dto/create-player.dto';
+import { UpdatePlayerDto } from './dto/update-player.dto';
+import { CreateFileDto } from '../files/dto/create-file.dto';
+import { File } from '../../models/file.model';
 
 @Injectable()
 export class PlayersService {

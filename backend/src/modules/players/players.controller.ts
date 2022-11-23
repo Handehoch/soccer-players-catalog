@@ -14,9 +14,9 @@ import {
   Res,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
-import { Player } from '../../models/players/player.model';
-import { CreatePlayerDto } from '../../models/players/dto/create-player.dto';
-import { UpdatePlayerDto } from '../../models/players/dto/update-player.dto';
+import { Player } from '../../models/player.model';
+import { CreatePlayerDto } from './dto/create-player.dto';
+import { UpdatePlayerDto } from './dto/update-player.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 
