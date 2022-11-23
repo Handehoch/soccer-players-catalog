@@ -3,18 +3,29 @@ import { InjectModel } from '@nestjs/sequelize';
 import { Player } from '../../models/player.model';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
-import { CreateFileDto } from '../files/dto/create-file.dto';
 import { File } from '../../models/file.model';
+import { FilesService } from '../files/files.service';
 
 @Injectable()
 export class PlayersService {
   constructor(
+    private readonly filesService: FilesService,
     @InjectModel(Player) private readonly playerModel: typeof Player,
     @InjectModel(File) private readonly fileModel: typeof File,
   ) {}
 
   async createPlayer(dto: CreatePlayerDto): Promise<Player> {
     return await this.playerModel.create(dto);
+  }
+
+  async getPlayers(): Promise<Player[]> {
+    return await this.playerModel.findAll();
+  }
+
+  async getPlayerById(id: number): Promise<Player> {
+    return await this.playerModel.findOne({
+      where: { id },
+    });
   }
 
   async updatePlayer(id: number, dto: UpdatePlayerDto): Promise<Player> {
@@ -37,39 +48,5 @@ export class PlayersService {
     });
 
     return player;
-  }
-
-  async getPlayers(): Promise<Player[]> {
-    return await this.playerModel.findAll();
-  }
-
-  async setAvatar(id: number, dto: CreateFileDto): Promise<Player> {
-    let file = await this.fileModel.findOne({
-      where: { playerId: id },
-    });
-
-    if (!file) {
-      file = await this.fileModel.create(dto);
-    } else {
-      await this.fileModel.update(dto, {
-        where: { playerId: id },
-      });
-    }
-
-    const update: UpdatePlayerDto = {
-      avatarId: file.id,
-    };
-
-    return await this.updatePlayer(id, update);
-  }
-
-  async getAvatarById(id: number) {
-    const player = await this.playerModel.findOne({
-      where: { id: id },
-    });
-
-    return await this.fileModel.findOne({
-      where: { id: player.avatarId },
-    });
   }
 }
