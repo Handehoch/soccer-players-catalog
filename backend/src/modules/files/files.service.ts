@@ -17,23 +17,25 @@ export class FilesService {
   async createFile(image: Express.Multer.File): Promise<File> {
     const dto: CreateFileDto = {
       filename: image.originalname,
-      path: image.path,
-      mimetype: image.mimetype,
       data: image.buffer,
     };
 
     return await this.fileModel.create(dto);
   }
 
-  async setAvatarToPlayer(id, image: Express.Multer.File) {
-    return await this.fileModel.create({
-      playerId: id,
-      filename: image.filename,
-      data: image.buffer,
+  async getFileById(id: number): Promise<File> {
+    const file = await this.fileModel.findOne({
+      where: { id },
     });
+
+    if (!file) {
+      throw new NotFoundException(null, ErrorMessage.FILE_NOT_FOUND);
+    }
+
+    return file;
   }
 
-  async getFileById(id: number) {
+  async getFileDataById(id: number): Promise<StreamableFile> {
     const file = await this.fileModel.findOne({
       where: { id },
     });

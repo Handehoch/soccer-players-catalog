@@ -1,8 +1,10 @@
 import { Column, DataType, Model, Table } from 'sequelize-typescript';
 import { CreateFileDto } from '../modules/files/dto/create-file.dto';
+import { Expose } from 'class-transformer';
 
 @Table({ tableName: 'files', createdAt: false, updatedAt: false })
 export class File extends Model<File, CreateFileDto> {
+  @Expose()
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -11,6 +13,7 @@ export class File extends Model<File, CreateFileDto> {
   })
   id: number;
 
+  @Expose()
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -18,22 +21,12 @@ export class File extends Model<File, CreateFileDto> {
   filename: string;
 
   @Column({
-    type: DataType.STRING,
-  })
-  path: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  mimetype: string;
-
-  @Column({
     type: 'bytea',
     allowNull: false,
   })
   data: Uint8Array;
 
+  @Expose()
   @Column({
     type: DataType.INTEGER,
   })

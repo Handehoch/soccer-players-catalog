@@ -51,6 +51,10 @@ export class Player extends Model<Player, CreatePlayerDto> {
   })
   birthday: Date;
 
+  @Index({
+    name: 'fullName',
+    unique: true,
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,

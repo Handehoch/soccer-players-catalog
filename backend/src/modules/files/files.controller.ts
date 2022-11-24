@@ -1,4 +1,5 @@
 import {
+  ClassSerializerInterceptor,
   Controller,
   Get,
   Header,
@@ -8,6 +9,7 @@ import {
   ParseFilePipeBuilder,
   ParseIntPipe,
   Post,
+  SerializeOptions,
   StreamableFile,
   UploadedFile,
   UseInterceptors,
@@ -17,6 +19,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { File } from '../../models/file.model';
 
 @Controller()
+@SerializeOptions({
+  strategy: 'excludeAll',
+})
 export class FilesController {
   constructor(private readonly filesService: FilesService) {}
 
@@ -38,10 +43,17 @@ export class FilesController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
+  @UseInterceptors(ClassSerializerInterceptor)
+  getFileById(@Param('id', ParseIntPipe) id: number): Promise<File> {
+    return this.filesService.getFileById(id);
+  }
+
+  @Get(':id')
+  @HttpCode(HttpStatus.OK)
   @Header('Content-Type', 'image/jpeg')
   getFileDataById(
     @Param('id', ParseIntPipe) id: number,
   ): Promise<StreamableFile> {
-    return this.filesService.getFileById(id);
+    return this.filesService.getFileDataById(id);
   }
 }

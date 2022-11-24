@@ -9,11 +9,16 @@ import {
   Post,
   HttpStatus,
   ParseIntPipe,
+  ValidationPipe,
+  UploadedFile,
+  ParseFilePipeBuilder,
+  UseInterceptors,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { Player } from '../../models/player.model';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller()
 export class PlayersController {
@@ -21,7 +26,7 @@ export class PlayersController {
 
   @Post('')
   @HttpCode(HttpStatus.CREATED)
-  createPlayer(@Body() dto: CreatePlayerDto) {
+  createPlayer(@Body(ValidationPipe) dto: CreatePlayerDto) {
     return this.playersService.createPlayer(dto);
   }
 
@@ -47,5 +52,22 @@ export class PlayersController {
   @HttpCode(HttpStatus.OK)
   deletePlayer(@Param('id') id: number) {
     return this.playersService.deletePLayer(id);
+  }
+
+  @Post(':id/avatar')
+  @HttpCode(HttpStatus.CREATED)
+  @UseInterceptors(FileInterceptor('image'))
+  setAvatar(
+    @Param('id', ParseIntPipe) id: number,
+    @UploadedFile(
+      new ParseFilePipeBuilder()
+        .addFileTypeValidator({
+          fileType: /(jpg|jpeg|png|gif)$/,
+        })
+        .build(),
+    )
+    image: Express.Multer.File,
+  ): Promise<Player> {
+    return this.playersService.setAvatarById(id, image);
   }
 }
