@@ -48,7 +48,7 @@ export class FilesController {
     return this.filesService.getFileById(id);
   }
 
-  @Get(':id')
+  @Get(':id/data')
   @HttpCode(HttpStatus.OK)
   @Header('Content-Type', 'image/jpeg')
   getFileDataById(

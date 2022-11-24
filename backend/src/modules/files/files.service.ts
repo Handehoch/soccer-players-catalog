@@ -36,9 +36,15 @@ export class FilesService {
   }
 
   async getFileDataById(id: number): Promise<StreamableFile> {
-    const file = await this.fileModel.findOne({
-      where: { id },
-    });
+    return this.getFileDataByOptions({ id });
+  }
+
+  async getFileDataByPlayerId(id: number) {
+    return await this.getFileDataByOptions({ playerId: id });
+  }
+
+  private async getFileDataByOptions(options: Object): Promise<StreamableFile> {
+    const file = await this.fileModel.findOne(options);
 
     if (!file) {
       throw new NotFoundException({

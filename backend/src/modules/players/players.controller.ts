@@ -13,6 +13,8 @@ import {
   UploadedFile,
   ParseFilePipeBuilder,
   UseInterceptors,
+  StreamableFile,
+  Header,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { Player } from '../../models/player.model';
@@ -57,7 +59,7 @@ export class PlayersController {
   @Post(':id/avatar')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('image'))
-  setAvatar(
+  setAvatarById(
     @Param('id', ParseIntPipe) id: number,
     @UploadedFile(
       new ParseFilePipeBuilder()
@@ -69,5 +71,14 @@ export class PlayersController {
     image: Express.Multer.File,
   ): Promise<Player> {
     return this.playersService.setAvatarById(id, image);
+  }
+
+  @Get(':id/avatar')
+  @HttpCode(HttpStatus.OK)
+  @Header('Content-Type', 'image/jpeg')
+  getAvatarById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<StreamableFile> {
+    return this.playersService.getAvatarById(id);
   }
 }

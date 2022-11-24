@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  StreamableFile,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Player } from '../../models/player.model';
@@ -94,5 +95,9 @@ export class PlayersService {
     await file.update({ playerId: player.id });
 
     return player;
+  }
+
+  async getAvatarById(id: number): Promise<StreamableFile> {
+    return this.filesService.getFileDataByPlayerId(id);
   }
 }
