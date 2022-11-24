@@ -35,6 +35,20 @@ export class FilesService {
     return file;
   }
 
+  async deleteImagesByPlayerId(id: number): Promise<void> {
+    await this.fileModel.destroy({
+      where: { playerId: id },
+    });
+
+    const images = await this.fileModel.findAll({
+      where: { playerId: id },
+    });
+
+    images.forEach((img) => {
+      console.log(img.playerId);
+    });
+  }
+
   async getFileDataById(id: number): Promise<StreamableFile> {
     return this.getFileDataByOptions({ id });
   }

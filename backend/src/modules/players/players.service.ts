@@ -87,6 +87,8 @@ export class PlayersService {
     const player = await this.getPlayerById(id);
     const file = await this.filesService.createFile(image);
 
+    await this.filesService.deleteImagesByPlayerId(player.id);
+
     await player.update({
       avatar: file,
       avatarId: file.id,
