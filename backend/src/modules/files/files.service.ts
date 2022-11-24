@@ -25,7 +25,7 @@ export class FilesService {
     return await this.fileModel.create(dto);
   }
 
-  async setAvatarToPlayer(id, image: Express.Multer.File) {
+  async setAvatarToPlayer(id, image: Express.Multer.File): Promise<File> {
     return await this.fileModel.create({
       playerId: id,
       filename: image.filename,
@@ -33,7 +33,7 @@ export class FilesService {
     });
   }
 
-  async getFileById(id: number) {
+  async getFileById(id: number): Promise<StreamableFile> {
     const file = await this.fileModel.findOne({
       where: { id },
     });
