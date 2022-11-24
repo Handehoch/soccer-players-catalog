@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-import { StreamableFile } from '@nestjs/common';
 
 export class CreateFileDto {
   @IsNotEmpty()
@@ -7,15 +6,7 @@ export class CreateFileDto {
   filename: string;
 
   @IsNotEmpty()
-  @IsString()
-  path: string;
-
-  @IsNotEmpty()
-  @IsString()
-  mimetype: string;
-
-  @IsNotEmpty()
-  data: Uint8Array | StreamableFile;
+  data: Uint8Array;
 
   @IsNotEmpty()
   @IsNumber()

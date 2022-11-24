@@ -1,4 +1,9 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  StreamableFile,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Player } from '../../models/player.model';
 import { CreatePlayerDto } from './dto/create-player.dto';
@@ -6,29 +11,45 @@ import { UpdatePlayerDto } from './dto/update-player.dto';
 import { File } from '../../models/file.model';
 import { FilesService } from '../files/files.service';
 import { ErrorMessage } from '../../utils/utils';
+import { FindOptions } from 'sequelize';
 
 @Injectable()
 export class PlayersService {
+  private readonly _playerOptions: FindOptions<Player>;
+
   constructor(
     private readonly filesService: FilesService,
     @InjectModel(Player) private readonly playerModel: typeof Player,
-    @InjectModel(File) private readonly fileModel: typeof File,
-  ) {}
+  ) {
+    this._playerOptions = {
+      include: [{ model: File, attributes: ['id', 'filename'] }],
+    };
+  }
 
   async createPlayer(dto: CreatePlayerDto): Promise<Player> {
+    const player = await this.playerModel.findOne({
+      where: {
+        firstname: dto.firstname,
+        lastname: dto.lastname,
+        teamName: dto.teamName,
+      },
+    });
+
+    if (player) {
+      throw new BadRequestException(null, ErrorMessage.PLAYER_EXISTS);
+    }
+
     return await this.playerModel.create(dto);
   }
 
   async getPlayers(): Promise<Player[]> {
-    return await this.playerModel.findAll({
-      include: [{ model: File, attributes: ['id', 'filename'] }],
-    });
+    return await this.playerModel.findAll(this._playerOptions);
   }
 
   async getPlayerById(id: number): Promise<Player> {
     const player = await this.playerModel.findOne({
       where: { id },
-      include: [{ model: File, attributes: ['id', 'filename'] }],
+      ...this._playerOptions,
     });
 
     if (!player) {
@@ -45,12 +66,14 @@ export class PlayersService {
 
     return this.playerModel.findOne({
       where: { id: id },
+      ...this._playerOptions,
     });
   }
 
   async deletePLayer(id: number): Promise<Player> {
     const player = await this.playerModel.findOne({
       where: { id: id },
+      ...this._playerOptions,
     });
 
     await this.playerModel.destroy({
@@ -58,5 +81,25 @@ export class PlayersService {
     });
 
     return player;
+  }
+
+  async setAvatarById(id: number, image: Express.Multer.File): Promise<Player> {
+    const player = await this.getPlayerById(id);
+    const file = await this.filesService.createFile(image);
+
+    await this.filesService.deleteImagesByPlayerId(player.id);
+
+    await player.update({
+      avatar: file,
+      avatarId: file.id,
+    });
+
+    await file.update({ playerId: player.id });
+
+    return player;
+  }
+
+  async getAvatarById(id: number): Promise<StreamableFile> {
+    return this.filesService.getFileDataByPlayerId(id);
   }
 }

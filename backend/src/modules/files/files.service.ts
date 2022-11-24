@@ -17,26 +17,48 @@ export class FilesService {
   async createFile(image: Express.Multer.File): Promise<File> {
     const dto: CreateFileDto = {
       filename: image.originalname,
-      path: image.path,
-      mimetype: image.mimetype,
       data: image.buffer,
     };
 
     return await this.fileModel.create(dto);
   }
 
-  async setAvatarToPlayer(id, image: Express.Multer.File): Promise<File> {
-    return await this.fileModel.create({
-      playerId: id,
-      filename: image.filename,
-      data: image.buffer,
-    });
-  }
-
-  async getFileById(id: number): Promise<StreamableFile> {
+  async getFileById(id: number): Promise<File> {
     const file = await this.fileModel.findOne({
       where: { id },
     });
+
+    if (!file) {
+      throw new NotFoundException(null, ErrorMessage.FILE_NOT_FOUND);
+    }
+
+    return file;
+  }
+
+  async deleteImagesByPlayerId(id: number): Promise<void> {
+    await this.fileModel.destroy({
+      where: { playerId: id },
+    });
+
+    const images = await this.fileModel.findAll({
+      where: { playerId: id },
+    });
+
+    images.forEach((img) => {
+      console.log(img.playerId);
+    });
+  }
+
+  async getFileDataById(id: number): Promise<StreamableFile> {
+    return this.getFileDataByOptions({ id });
+  }
+
+  async getFileDataByPlayerId(id: number) {
+    return await this.getFileDataByOptions({ playerId: id });
+  }
+
+  private async getFileDataByOptions(options: Object): Promise<StreamableFile> {
+    const file = await this.fileModel.findOne(options);
 
     if (!file) {
       throw new NotFoundException({
