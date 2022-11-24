@@ -23,31 +23,52 @@ export class Player extends Model<Player, CreatePlayerDto> {
     name: 'fullName',
     unique: true,
   })
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   firstname: string;
 
   @Index({
     name: 'fullName',
     unique: true,
   })
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   lastname: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   sex: string;
 
-  @Column({ type: DataType.DATE, allowNull: false })
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+  })
   birthday: Date;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   teamName: string;
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   country: string;
 
   @HasOne(() => File, 'playerId')
   avatar: File;
 
-  @Column({ type: DataType.INTEGER, allowNull: true })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: true,
+  })
   avatarId: number;
 }

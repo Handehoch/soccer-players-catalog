@@ -13,11 +13,24 @@ export class File extends Model<File, CreateFileDto> {
 
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   filename: string;
 
   @Column({
+    type: DataType.STRING,
+  })
+  path: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  mimetype: string;
+
+  @Column({
     type: 'bytea',
+    allowNull: false,
   })
   data: Uint8Array;
 

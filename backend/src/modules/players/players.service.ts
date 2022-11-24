@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Player } from '../../models/player.model';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 import { File } from '../../models/file.model';
 import { FilesService } from '../files/files.service';
+import { ErrorMessage } from '../../utils/utils';
 
 @Injectable()
 export class PlayersService {
@@ -19,13 +20,22 @@ export class PlayersService {
   }
 
   async getPlayers(): Promise<Player[]> {
-    return await this.playerModel.findAll();
+    return await this.playerModel.findAll({
+      include: [{ model: File, attributes: ['id', 'filename'] }],
+    });
   }
 
   async getPlayerById(id: number): Promise<Player> {
-    return await this.playerModel.findOne({
+    const player = await this.playerModel.findOne({
       where: { id },
+      include: [{ model: File, attributes: ['id', 'filename'] }],
     });
+
+    if (!player) {
+      throw new NotFoundException(null, ErrorMessage.PLAYER_NOT_FOUND);
+    }
+
+    return player;
   }
 
   async updatePlayer(id: number, dto: UpdatePlayerDto): Promise<Player> {

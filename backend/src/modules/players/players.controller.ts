@@ -31,7 +31,7 @@ export class PlayersController {
     return this.playersService.getPlayers();
   }
 
-  @Get('')
+  @Get(':id')
   @HttpCode(HttpStatus.OK)
   getPlayerById(@Param('id', ParseIntPipe) id: number): Promise<Player> {
     return this.playersService.getPlayerById(id);
