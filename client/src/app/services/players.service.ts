@@ -1,4 +1,4 @@
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPlayer } from '../interfaces/player.intreface';
@@ -7,9 +7,8 @@ import { IPlayer } from '../interfaces/player.intreface';
   providedIn: 'root',
 })
 export class PlayersService {
-
   constructor(
-    @Inject("BASE_API_URL") private readonly baseUrl: string,
+    @Inject('BASE_API_URL') private readonly baseUrl: string,
     private readonly httpService: HttpClient
   ) {}
 

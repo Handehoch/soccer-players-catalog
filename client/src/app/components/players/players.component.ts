@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {PlayersService} from '../../services/players.service';
-import {Observable} from 'rxjs';
-import {IPlayer} from '../../interfaces/player.intreface';
+import { Component, OnInit } from '@angular/core';
+import { PlayersService } from '../../services/players.service';
+import { Observable } from 'rxjs';
+import { IPlayer } from '../../interfaces/player.intreface';
 
 @Component({
   selector: 'app-players',
@@ -9,11 +9,10 @@ import {IPlayer} from '../../interfaces/player.intreface';
   styleUrls: ['./players.component.scss'],
 })
 export class PlayersComponent implements OnInit {
-  constructor(
-    private readonly playerService: PlayersService,
-  ) {}
-
+  title: string = 'players';
   players$: Observable<IPlayer[]> | undefined;
+
+  constructor(private readonly playerService: PlayersService) {}
 
   getPlayers() {
     this.players$ = this.playerService.getPlayers();
