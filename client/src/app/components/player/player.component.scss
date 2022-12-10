@@ -1,0 +1,42 @@
+.player {
+  padding: 20px 30px;
+  border: 2px dashed crimson;
+
+  p {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.3em;
+    word-wrap: break-word;
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 201px;
+    margin-bottom: 20px;
+  }
+
+  @media (min-width: 992px) and (max-width: 1199px) {
+    &__avatar {
+      height: 250px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    &__avatar {
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    &__avatar {
+      height: 450px;
+    }
+  }
+
+  &__name {
+    font-size: 20px;
+    max-width: 100%;
+    margin: 0 0 20px;
+  }
+}

@@ -1,24 +1,5 @@
-<ul class="players">
-  <li class="players__item" *ngFor="let player of players$ | async">
-    <div class="players__card">
-      <img [src]="player.avatar"  alt="Avatar" class="players__avatar">
-      <h2 class="players__name">Name: {{player.firstname}} {{player.lastname}}</h2>
-      <div class="players__description">
-        <ul class="players__info">
-          <li class="players__data">
-            <p class="players__sex">Sex: {{player.sex}}</p>
-          </li>
-          <li class="players__data">
-            <p class="players__birthday">Birthday: {{player.birthday | date}}</p>
-          </li>
-          <li class="players__data">
-            <p class="players__team">Team: {{player.teamName}}</p>
-          </li>
-          <li class="players__data">
-            <p class="players__country">Country: {{player.country}}</p>
-          </li>
-        </ul>
-      </div>
-    </div>
+<ul class="row g-4 players">
+  <li class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-12 players__item" *ngFor="let player of players$ | async">
+    <app-player class="players__card" [player]="player"></app-player>
   </li>
 </ul>

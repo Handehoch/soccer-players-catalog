@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPlayer } from '../interfaces/player.intreface';
@@ -7,15 +7,19 @@ import { IPlayer } from '../interfaces/player.intreface';
   providedIn: 'root',
 })
 export class PlayersService {
-  constructor(private readonly httpService: HttpClient) {}
+
+  constructor(
+    @Inject("BASE_API_URL") private readonly baseUrl: string,
+    private readonly httpService: HttpClient
+  ) {}
 
   getPlayers(): Observable<IPlayer[]> {
-    return this.httpService.get<IPlayer[]>('http://localhost:3030/api/players');
+    return this.httpService.get<IPlayer[]>(`${this.baseUrl}/api/players`);
   }
 
-  getAvatarByPlayerId(player: IPlayer) {
+  getAvatarByPlayerId(avatarId: number) {
     return this.httpService.get(
-      `http://localhost:3030/api/players/${player.id}/avatar`,
+      `${this.baseUrl}/api/players/${avatarId}/avatar`,
       {
         responseType: 'blob',
       }

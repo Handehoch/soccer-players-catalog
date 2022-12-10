@@ -9,7 +9,9 @@ import { PlayerComponent } from '../player/player.component';
 @NgModule({
   declarations: [AppComponent, PlayersComponent, PlayerComponent],
   imports: [BrowserModule, HttpClientModule],
-  providers: [],
+  providers: [{
+    provide: "BASE_API_URL", useValue: "http://localhost:3030"
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
