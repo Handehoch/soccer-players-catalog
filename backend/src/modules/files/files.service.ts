@@ -50,11 +50,11 @@ export class FilesService {
   }
 
   async getFileDataById(id: number): Promise<StreamableFile> {
-    return this.getFileDataByOptions({ id });
+    return this.getFileDataByOptions({ where: { id } });
   }
 
   async getFileDataByPlayerId(id: number) {
-    return await this.getFileDataByOptions({ playerId: id });
+    return await this.getFileDataByOptions({ where: { playerId: id } });
   }
 
   private async getFileDataByOptions(options: Object): Promise<StreamableFile> {

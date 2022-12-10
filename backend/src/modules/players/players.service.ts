@@ -43,13 +43,12 @@ export class PlayersService {
   }
 
   async getPlayers(): Promise<Player[]> {
-    return await this.playerModel.findAll(this._playerOptions);
+    return await this.playerModel.findAll();
   }
 
   async getPlayerById(id: number): Promise<Player> {
     const player = await this.playerModel.findOne({
       where: { id },
-      ...this._playerOptions,
     });
 
     if (!player) {

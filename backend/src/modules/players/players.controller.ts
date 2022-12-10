@@ -28,7 +28,7 @@ export class PlayersController {
 
   @Post('')
   @HttpCode(HttpStatus.CREATED)
-  createPlayer(@Body(ValidationPipe) dto: CreatePlayerDto) {
+  createPlayer(@Body(ValidationPipe) dto: CreatePlayerDto): Promise<Player> {
     return this.playersService.createPlayer(dto);
   }
 
@@ -46,13 +46,16 @@ export class PlayersController {
 
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
-  updatePLayer(@Param('id') id: number, @Body() dto: UpdatePlayerDto) {
+  updatePLayer(
+    @Param('id') id: number,
+    @Body() dto: UpdatePlayerDto,
+  ): Promise<Player> {
     return this.playersService.updatePlayer(id, dto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  deletePlayer(@Param('id') id: number) {
+  deletePlayer(@Param('id') id: number): Promise<Player> {
     return this.playersService.deletePLayer(id);
   }
 

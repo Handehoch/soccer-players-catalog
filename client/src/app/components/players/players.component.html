@@ -1,7 +1,7 @@
 <ul class="players">
   <li class="players__item" *ngFor="let player of players$ | async">
     <div class="players__card">
-      <img [src]="player.avatar" alt="Avatar" class="players__avatar">
+      <img [src]="player.avatar"  alt="Avatar" class="players__avatar">
       <h2 class="players__name">Name: {{player.firstname}} {{player.lastname}}</h2>
       <div class="players__description">
         <ul class="players__info">
