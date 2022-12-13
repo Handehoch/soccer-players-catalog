@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { PlayersService } from '../../services/players.service';
 import { IPlayer } from '../../interfaces/player.intreface';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-create-player-form',
@@ -51,7 +52,14 @@ export class CreatePlayerFormComponent implements OnInit {
       ...this.form?.value,
     };
 
-    this.playersService.createPlayer(dto).subscribe((r) => console.log(r));
+    this.playersService
+      .createPlayer(dto)
+      .pipe(catchError((err) => of(`Caught one error: ${err.message}`)))
+      .subscribe((res) => {
+        if (typeof res == 'string') {
+          console.log(res);
+        }
+      });
   }
 
   ngOnInit(): void {
