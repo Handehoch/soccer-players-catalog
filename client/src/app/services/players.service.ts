@@ -12,6 +12,12 @@ export class PlayersService {
     private readonly httpService: HttpClient
   ) {}
 
+  createPlayer(
+    dto: Omit<IPlayer, 'avatarId' | 'avatar' | 'id'>
+  ): Observable<IPlayer> {
+    return this.httpService.post<IPlayer>(`${this.baseUrl}/api/players`, dto);
+  }
+
   getPlayers(): Observable<IPlayer[]> {
     return this.httpService.get<IPlayer[]>(`${this.baseUrl}/api/players`);
   }

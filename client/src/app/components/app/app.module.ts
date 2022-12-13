@@ -9,6 +9,7 @@ import { HeaderComponent } from '../header/header.component';
 import { PlayerCreationComponent } from '../player-creation/player-creation.component';
 import { CreatePlayerFormComponent } from '../create-player-form/create-player-form.component';
 import { AppRoutingModule } from '../../app-routing/app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,12 @@ import { AppRoutingModule } from '../../app-routing/app-routing.module';
     PlayerCreationComponent,
     CreatePlayerFormComponent,
   ],
-  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     {
       provide: 'BASE_API_URL',

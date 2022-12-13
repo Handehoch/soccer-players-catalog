@@ -1,1 +1,40 @@
-<p>create-player-form works!</p>
+<form *ngIf="form !== undefined"
+      class="d-flex flex-column form align-items-center"
+      method="post"
+      target="_parent"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+>
+  <ul class="form__items">
+    <li class="form__item">
+      <label class="form__label" for="firstname">Firstname:</label>
+      <input class="form__input" type="text" name="firstname" id="firstname" formControlName="firstname">
+    </li>
+    <li class="form__item">
+      <label class="form__label" for="lastname">Lastname:</label>
+      <input class="form__input" type="text" name="lastname" id="lastname" formControlName="lastname">
+    </li>
+    <li class="form__item">
+      <label class="form__label" for="sex">Sex:</label>
+      <select class="form__input" name="sex" id="sex" formControlName="sex">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </li>
+    <li class="form__item">
+      <label class="form__label" for="birthday">Birthday:</label>
+      <input class="form__input" type="date" name="birthday" id="birthday" formControlName="birthday">
+    </li>
+    <li class="form__item">
+      <label class="form__label" for="teamName">Team name:</label>
+      <input class="form__input" type="text" name="teamName" id="teamName" formControlName="teamName">
+    </li>
+    <li class="form__item">
+      <label class="form__label" for="country">Country: </label>
+      <input class="form__input" type="text" name="country" id="country" formControlName="country">
+    </li>
+    <li class="form__item">
+      <button class="button form__button" type="submit">Create</button>
+    </li>
+  </ul>
+</form>

@@ -4,12 +4,28 @@ body {
   font-family: "Heebo", "Lato", sans-serif;
 }
 
-.header__wrapper {
-  background-color: #a28089;
-}
-
 .page__title {
   font-size: 54px;
   font-weight: bold;
   margin-bottom: 30px;
+}
+
+.button {
+  background-color: #8458B3;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 10px;
+  display: block;
+  cursor: pointer;
+  color: #000;
+}
+
+.button:hover {
+  background-color: #fff;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:focus {
+  background-color: #fff;
+  transition: background-color 0.3s ease-in-out;
 }
