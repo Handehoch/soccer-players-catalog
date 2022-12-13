@@ -22,6 +22,30 @@ export class CreatePlayerFormComponent implements OnInit {
     private readonly fb: FormBuilder
   ) {}
 
+  get firstname() {
+    return this.form?.get('firstname');
+  }
+
+  get lastname() {
+    return this.form?.get('lastname');
+  }
+
+  get sex() {
+    return this.form?.get('sex');
+  }
+
+  get birthday() {
+    return this.form?.get('birthday');
+  }
+
+  get teamName() {
+    return this.form?.get('teamName');
+  }
+
+  get country() {
+    return this.form?.get('country');
+  }
+
   onSubmit(): void {
     const dto: Omit<IPlayer, 'avatarId' | 'avatar' | 'id'> = {
       ...this.form?.value,
@@ -31,18 +55,13 @@ export class CreatePlayerFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.fb.group(
-      {
-        firstname: new FormControl(''),
-        lastname: new FormControl(''),
-        sex: new FormControl(''),
-        birthday: new FormControl(''),
-        teamName: new FormControl(''),
-        country: new FormControl(''),
-      },
-      {
-        validators: [Validators.required],
-      }
-    );
+    this.form = this.fb.group({
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
+      sex: new FormControl('', Validators.required),
+      birthday: new FormControl('', Validators.required),
+      teamName: new FormControl('', Validators.required),
+      country: new FormControl('', Validators.required),
+    });
   }
 }

@@ -9,14 +9,26 @@
     <li class="form__item">
       <label class="form__label" for="firstname">Firstname:</label>
       <input class="form__input" type="text" name="firstname" id="firstname" formControlName="firstname">
+      <div *ngIf="firstname?.invalid && (firstname?.touched || firstname?.dirty)"
+           class="form__error">
+        <span *ngIf="firstname?.errors?.['required']" style="color: crimson">Field is required</span>
+      </div>
     </li>
     <li class="form__item">
       <label class="form__label" for="lastname">Lastname:</label>
       <input class="form__input" type="text" name="lastname" id="lastname" formControlName="lastname">
+      <div *ngIf="lastname?.invalid && (lastname?.touched || lastname?.dirty)"
+           class="form__error">
+        <span *ngIf="lastname?.errors?.['required']" style="color: crimson">Field is required</span>
+      </div>
     </li>
     <li class="form__item">
       <label class="form__label" for="sex">Sex:</label>
       <select class="form__input" name="sex" id="sex" formControlName="sex">
+        <div *ngIf="sex?.invalid && (sex?.touched || sex?.dirty)"
+             class="form__error">
+          <span *ngIf="sex?.errors?.['required']" style="color: crimson">Field is required</span>
+        </div>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
@@ -24,14 +36,26 @@
     <li class="form__item">
       <label class="form__label" for="birthday">Birthday:</label>
       <input class="form__input" type="date" name="birthday" id="birthday" formControlName="birthday">
+      <div *ngIf="birthday?.invalid && (birthday?.touched || birthday?.dirty)"
+           class="form__error">
+        <span *ngIf="birthday?.errors?.['required']" style="color: crimson">Field is required</span>
+      </div>
     </li>
     <li class="form__item">
       <label class="form__label" for="teamName">Team name:</label>
       <input class="form__input" type="text" name="teamName" id="teamName" formControlName="teamName">
+      <div *ngIf="teamName?.invalid && (teamName?.touched || teamName?.dirty)"
+           class="form__error">
+        <span *ngIf="teamName?.errors?.['required']" style="color: crimson">Field is required</span>
+      </div>
     </li>
     <li class="form__item">
       <label class="form__label" for="country">Country: </label>
       <input class="form__input" type="text" name="country" id="country" formControlName="country">
+      <div *ngIf="country?.invalid && (country?.touched ||country?.dirty)"
+           class="form__error">
+        <span *ngIf="country?.errors?.['required']" style="color: crimson">Field is required</span>
+      </div>
     </li>
     <li class="form__item">
       <button class="button form__button" type="submit">Create</button>
