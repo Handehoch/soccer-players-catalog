@@ -48,7 +48,6 @@ export class CreatePlayerFormComponent implements OnInit {
   }
 
   // TODO form error handling and showing on screen
-
   onSubmit(): void {
     const dto: Omit<IPlayer, 'avatarId' | 'avatar' | 'id'> = {
       ...this.form?.value,

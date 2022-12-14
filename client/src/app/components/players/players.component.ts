@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../../services/players.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IPlayer } from '../../interfaces/player.intreface';
 
 @Component({
@@ -16,6 +16,14 @@ export class PlayersComponent implements OnInit {
 
   getPlayers() {
     this.players$ = this.playerService.getPlayers();
+  }
+
+  onPlayerDelete(playerId: number): void {
+    this.players$ = this.players$?.pipe(
+      map((players) => {
+        return players.filter((p) => p.id !== playerId);
+      })
+    );
   }
 
   ngOnInit(): void {

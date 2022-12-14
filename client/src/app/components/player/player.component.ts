@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IPlayer } from '../../interfaces/player.intreface';
 import { PlayersService } from '../../services/players.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,6 +11,7 @@ import { catchError, of } from 'rxjs';
 })
 export class PlayerComponent implements OnInit {
   @Input() player!: IPlayer;
+  @Output() deletePlayerEvent = new EventEmitter<number>();
 
   constructor(
     private readonly playersService: PlayersService,
@@ -42,6 +43,7 @@ export class PlayerComponent implements OnInit {
         if (typeof res === 'string') {
           console.log(res);
         }
+        this.deletePlayerEvent.emit(this.player.id);
       });
   }
 
