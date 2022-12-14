@@ -30,4 +30,10 @@ export class PlayersService {
       }
     );
   }
+
+  deletePlayer(id: number) {
+    return this.httpService.delete<IPlayer>(
+      `${this.baseUrl}/api/players/${id}`
+    );
+  }
 }

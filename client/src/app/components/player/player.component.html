@@ -1,4 +1,7 @@
 <div class="d-flex flex-column align-content-center player">
+  <div class="player__delete">
+    <button class="card-button player__delete-button player__delete-button--bg" (click)="deletePlayer()"></button>
+  </div>
   <img [src]="player.avatar" alt="Avatar" class="player__avatar">
   <h2 class="player__name">{{player.firstname}} {{player.lastname}}</h2>
   <div class="player__description">

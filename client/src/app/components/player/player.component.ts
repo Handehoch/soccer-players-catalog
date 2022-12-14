@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IPlayer } from '../../interfaces/player.intreface';
 import { PlayersService } from '../../services/players.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-player',
@@ -30,6 +31,17 @@ export class PlayerComponent implements OnInit {
           );
           console.log(this.player.avatar);
         };
+      });
+  }
+
+  deletePlayer() {
+    this.playersService
+      .deletePlayer(this.player.id)
+      .pipe(catchError((err) => of(`Caught one error: ${err.message}`)))
+      .subscribe((res) => {
+        if (typeof res === 'string') {
+          console.log(res);
+        }
       });
   }
 
