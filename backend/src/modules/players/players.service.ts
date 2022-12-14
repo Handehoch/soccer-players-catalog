@@ -43,7 +43,9 @@ export class PlayersService {
   }
 
   async getPlayers(): Promise<Player[]> {
-    return await this.playerModel.findAll();
+    return await this.playerModel.findAll({
+      order: [['id', 'ASC']],
+    });
   }
 
   async getPlayerById(id: number): Promise<Player> {
