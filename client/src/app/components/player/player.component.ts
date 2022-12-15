@@ -24,13 +24,11 @@ export class PlayerComponent implements OnInit {
       .subscribe((avatar) => {
         const reader = new FileReader();
         reader.readAsDataURL(avatar);
-        console.log(this.player.avatar);
 
         reader.onload = () => {
           this.player.avatar = this.sanitizer.bypassSecurityTrustUrl(
             reader.result as string
           );
-          console.log(this.player.avatar);
         };
       });
   }
