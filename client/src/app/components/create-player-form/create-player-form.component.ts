@@ -59,11 +59,13 @@ export class CreatePlayerFormComponent implements OnInit {
       .createPlayer(dto)
       .pipe(
         catchError((err) => {
-          this.toastr.error('Something went wrong!', 'Error', {
+          this.toastr.error(err.error.message, 'Error', {
             progressBar: true,
           });
 
-          return of(`Caught one error: ${err.message}`);
+          console.log(err);
+
+          return of(`Caught one error: ${err.error.message}`);
         })
       )
       .subscribe((res) => {
