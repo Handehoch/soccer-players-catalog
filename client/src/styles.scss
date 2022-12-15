@@ -17,17 +17,21 @@ body {
   border-radius: 10px;
   display: block;
   cursor: pointer;
-  color: #000;
+  color: #fff;
+  font-size: 18px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .button:hover {
   background-color: #fff;
-  transition: background-color 0.3s ease-in-out;
+  color: #000;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .button:focus {
   background-color: #fff;
-  transition: background-color 0.3s ease-in-out;
+  color: #000;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .card-button {
