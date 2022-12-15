@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../../services/players.service';
 import { map, Observable } from 'rxjs';
-import { IPlayer } from '../../interfaces/player.intreface';
+import { IPlayer } from '../../interfaces/app.intreface';
 
 @Component({
   selector: 'app-players',

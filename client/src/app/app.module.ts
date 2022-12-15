@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
-import { PlayersComponent } from '../players/players.component';
+import { AppComponent } from './components/app/app.component';
+import { PlayersComponent } from './components/players/players.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PlayerComponent } from '../player/player.component';
-import { HeaderComponent } from '../header/header.component';
-import { PlayerCreationComponent } from '../player-creation/player-creation.component';
-import { CreatePlayerFormComponent } from '../create-player-form/create-player-form.component';
-import { AppRoutingModule } from '../../app-routing/app-routing.module';
+import { PlayerComponent } from './components/player/player.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PlayerCreationComponent } from './components/player-creation/player-creation.component';
+import { CreatePlayerFormComponent } from './components/create-player-form/create-player-form.component';
+import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     {

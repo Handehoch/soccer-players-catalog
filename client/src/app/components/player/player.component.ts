@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IPlayer } from '../../interfaces/player.intreface';
+import { IPlayer } from '../../interfaces/app.intreface';
 import { PlayersService } from '../../services/players.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { catchError, of } from 'rxjs';
