@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IPlayer } from '../interfaces/player.intreface';
+import { IPlayer } from '../interfaces/app.intreface';
 
 @Injectable({
   providedIn: 'root',

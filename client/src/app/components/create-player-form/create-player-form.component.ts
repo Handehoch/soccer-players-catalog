@@ -6,8 +6,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { PlayersService } from '../../services/players.service';
-import { IPlayer } from '../../interfaces/player.intreface';
+import { IPlayer } from '../../interfaces/app.intreface';
 import { catchError, of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-player-form',
@@ -20,7 +21,8 @@ export class CreatePlayerFormComponent implements OnInit {
   constructor(
     @Inject('BASE_API_URL') public readonly baseUrl: string,
     private readonly playersService: PlayersService,
-    private readonly fb: FormBuilder
+    private readonly fb: FormBuilder,
+    private readonly toastr: ToastrService
   ) {}
 
   get firstname() {
@@ -55,10 +57,24 @@ export class CreatePlayerFormComponent implements OnInit {
 
     this.playersService
       .createPlayer(dto)
-      .pipe(catchError((err) => of(`Caught one error: ${err.message}`)))
+      .pipe(
+        catchError((err) => {
+          this.toastr.error(err.error.message, 'Error', {
+            progressBar: true,
+          });
+
+          console.log(err);
+
+          return of(`Caught one error: ${err.error.message}`);
+        })
+      )
       .subscribe((res) => {
         if (typeof res == 'string') {
           console.log(res);
+        } else {
+          this.toastr.success('Player created!', 'Success', {
+            progressBar: true,
+          });
         }
       });
   }

@@ -11,3 +11,8 @@ export interface IPlayer {
   avatarId: number;
   avatar: SafeUrl;
 }
+
+export interface INotification {
+  message: string;
+  colorScheme: string;
+}
