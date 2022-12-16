@@ -11,6 +11,7 @@ import { CreatePlayerFormComponent } from './components/create-player-form/creat
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
     HeaderComponent,
     PlayerCreationComponent,
     CreatePlayerFormComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,18 @@
-.header__wrapper {
+.header__wrapper,
+.footer__wrapper {
   background-color: #a28089;
+}
+
+.header__wrapper {
+  margin-bottom: 40px;
+}
+
+.main {
+  margin-bottom: 40px;
+}
+
+.footer__wrapper {
+  clear: both;
+  position: relative;
+  min-height: 100px;
 }
