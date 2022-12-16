@@ -2,6 +2,12 @@
 
 body {
   font-family: "Heebo", "Lato", sans-serif;
+  min-height: 100vh;
+}
+
+app-root {
+  display: block;
+  height: 100%;
 }
 
 .page__title {
