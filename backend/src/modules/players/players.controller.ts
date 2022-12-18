@@ -15,12 +15,14 @@ import {
   UseInterceptors,
   StreamableFile,
   Header,
+  Query,
 } from '@nestjs/common';
 import { PlayersService } from './players.service';
 import { Player } from '../../models/player.model';
 import { CreatePlayerDto } from './dto/create-player.dto';
 import { UpdatePlayerDto } from './dto/update-player.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { GetPlayersQuery } from './query/get-players.query';
 
 @Controller()
 export class PlayersController {
@@ -34,8 +36,8 @@ export class PlayersController {
 
   @Get('')
   @HttpCode(HttpStatus.OK)
-  getPlayers(): Promise<Player[]> {
-    return this.playersService.getPlayers();
+  getPlayers(@Query(ValidationPipe) query: GetPlayersQuery): Promise<Player[]> {
+    return this.playersService.getPlayers(query);
   }
 
   @Get(':id')

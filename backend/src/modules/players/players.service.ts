@@ -12,6 +12,7 @@ import { File } from '../../models/file.model';
 import { FilesService } from '../files/files.service';
 import { ErrorMessage } from '../../utils/utils';
 import { FindOptions } from 'sequelize';
+import { GetPlayersQuery } from './query/get-players.query';
 
 @Injectable()
 export class PlayersService {
@@ -42,10 +43,14 @@ export class PlayersService {
     return await this.playerModel.create(dto);
   }
 
-  async getPlayers(): Promise<Player[]> {
-    return await this.playerModel.findAll({
+  async getPlayers(query: GetPlayersQuery): Promise<Player[]> {
+    const filter: FindOptions<Player> = {
+      limit: query.limit ? query.limit : 8,
+      offset: query.offset ? query.offset : 0,
       order: [['id', 'ASC']],
-    });
+    };
+
+    return await this.playerModel.findAll(filter);
   }
 
   async getPlayerById(id: number): Promise<Player> {
