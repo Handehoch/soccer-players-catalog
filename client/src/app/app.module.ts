@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './components/footer/footer.component';
+import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NgbPaginationModule,
     ToastrModule.forRoot(),
   ],
   providers: [
