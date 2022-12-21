@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../../services/players.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IPlayers } from '../../interfaces/app.intreface';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
@@ -25,14 +25,14 @@ export class PlayersComponent implements OnInit {
   }
 
   onPlayerDelete(playerId: number): void {
-    // this.players$?.pipe(
-    //   map((players) => {
-    //     return players.players.filter((p) => p.id !== playerId);
-    //   })
-    // );
-
-    this.getPlayers();
-    this.loadPlayers(this.itemsPerPage, this.page * this.itemsPerPage);
+    this.players$ = this.players$?.pipe(
+      map((players) => {
+        return {
+          length: this.totalItems,
+          players: players.players.filter((p) => p.id !== playerId),
+        };
+      })
+    );
   }
 
   loadPlayers(limit: number, offset: number) {
