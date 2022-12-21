@@ -12,7 +12,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './components/footer/footer.component';
-import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -29,8 +30,9 @@ import {NgbPaginationModule} from "@ng-bootstrap/ng-bootstrap";
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgbPaginationModule,
+    TooltipModule.forRoot(),
     ToastrModule.forRoot(),
+    PaginationModule,
   ],
   providers: [
     {

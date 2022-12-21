@@ -24,13 +24,13 @@
 
   &__delete-button {
     background-color: crimson;
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transition: transform 0.3s linear, background-color 0.3s linear;
   }
 
   &__delete-button:hover {
     background-color: lightpink;
     transform: rotate(-45deg);
-    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transition: transform 0.3s linear, background-color 0.3s linear;
   }
 
   &__avatar {

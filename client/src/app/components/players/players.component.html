@@ -1,11 +1,15 @@
 <h1 class="page__title">{{title | titlecase}}</h1>
 <ul class="row g-4 players">
-  <ngb-pagination>
-    <li *ngFor="let player of players$ | async" class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-12 players__item">
-      <app-player [player]="player"
-                  (deletePlayerEvent)="onPlayerDelete($event)"
-                  class="players__card">
-      </app-player>
-    </li>
-  </ngb-pagination>
+  <li *ngFor="let player of players$ | async" class="col-xxl-3 col-xl-3 col-lg-4 col-md-6 col-12 players__item">
+    <app-player [player]="player"
+                (deletePlayerEvent)="onPlayerDelete($event)"
+                class="players__card">
+    </app-player>
+  </li>
 </ul>
+<div class="page__pagination">
+  <pagination [totalItems]="totalItems"
+              [itemsPerPage]="itemsPerPage"
+              (pageChanged)="pageChanged($event)">
+  </pagination>
+</div>

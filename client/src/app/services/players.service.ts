@@ -22,6 +22,15 @@ export class PlayersService {
     return this.httpService.get<IPlayer[]>(`${this.baseUrl}/api/players`);
   }
 
+  getPlayersByParams(limit: number, offset: number): Observable<IPlayer[]> {
+    return this.httpService.get<IPlayer[]>(`${this.baseUrl}/api/players`, {
+      params: {
+        limit,
+        offset
+      }
+    });
+  }
+
   getAvatarByPlayerId(avatarId: number) {
     return this.httpService.get(
       `${this.baseUrl}/api/players/${avatarId}/avatar`,

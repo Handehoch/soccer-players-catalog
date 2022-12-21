@@ -43,14 +43,20 @@ export class PlayersService {
     return await this.playerModel.create(dto);
   }
 
-  async getPlayers(query: GetPlayersQuery): Promise<Player[]> {
+  async getPlayers(query: GetPlayersQuery): Promise<{ length: number, players: Player[] }> {
     const filter: FindOptions<Player> = {
-      limit: query.limit ? query.limit : 8,
-      offset: query.offset ? query.offset : 0,
+      limit: query.limit ? query.limit : undefined,
+      offset: query.offset ? query.offset : undefined,
       order: [['id', 'ASC']],
     };
 
-    return await this.playerModel.findAll(filter);
+    const totalPlayers = await this.playerModel.findAll();
+    const players = await this.playerModel.findAll(filter);
+
+    return {
+      length: totalPlayers.length,
+      players: players
+    }
   }
 
   async getPlayerById(id: number): Promise<Player> {
