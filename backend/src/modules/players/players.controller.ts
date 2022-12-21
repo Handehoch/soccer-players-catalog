@@ -36,7 +36,9 @@ export class PlayersController {
 
   @Get('')
   @HttpCode(HttpStatus.OK)
-  getPlayers(@Query(ValidationPipe) query: GetPlayersQuery): Promise<Player[]> {
+  getPlayers(
+    @Query(ValidationPipe) query: GetPlayersQuery,
+  ): Promise<{ length: number; players: Player[] }> {
     return this.playersService.getPlayers(query);
   }
 

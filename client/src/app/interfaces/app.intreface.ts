@@ -1,5 +1,10 @@
 import { SafeUrl } from '@angular/platform-browser';
 
+export interface IPlayers {
+  length: number;
+  players: IPlayer[];
+}
+
 export interface IPlayer {
   id: number;
   firstname: string;

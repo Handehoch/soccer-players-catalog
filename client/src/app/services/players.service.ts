@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IPlayer } from '../interfaces/app.intreface';
+import { IPlayer, IPlayers } from '../interfaces/app.intreface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,16 +18,16 @@ export class PlayersService {
     return this.httpService.post<IPlayer>(`${this.baseUrl}/api/players`, dto);
   }
 
-  getPlayers(): Observable<IPlayer[]> {
-    return this.httpService.get<IPlayer[]>(`${this.baseUrl}/api/players`);
+  getPlayers(): Observable<IPlayers> {
+    return this.httpService.get<IPlayers>(`${this.baseUrl}/api/players`);
   }
 
-  getPlayersByParams(limit: number, offset: number): Observable<IPlayer[]> {
-    return this.httpService.get<IPlayer[]>(`${this.baseUrl}/api/players`, {
+  getPlayersByParams(limit: number, offset: number): Observable<IPlayers> {
+    return this.httpService.get<IPlayers>(`${this.baseUrl}/api/players`, {
       params: {
         limit,
-        offset
-      }
+        offset,
+      },
     });
   }
 

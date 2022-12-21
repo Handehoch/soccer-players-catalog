@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayersService } from '../../services/players.service';
-import { map, Observable } from 'rxjs';
-import { IPlayer } from '../../interfaces/app.intreface';
+import { Observable } from 'rxjs';
+import { IPlayers } from '../../interfaces/app.intreface';
 import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
@@ -11,7 +11,7 @@ import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 })
 export class PlayersComponent implements OnInit {
   title: string = 'players';
-  players$: Observable<IPlayer[]> | undefined;
+  players$: Observable<IPlayers> | undefined;
   page: number = 0;
   itemsPerPage: number = 8;
   totalItems!: number;
@@ -25,11 +25,14 @@ export class PlayersComponent implements OnInit {
   }
 
   onPlayerDelete(playerId: number): void {
-    this.players$ = this.players$?.pipe(
-      map((players) => {
-        return players.filter((p) => p.id !== playerId);
-      })
-    );
+    // this.players$?.pipe(
+    //   map((players) => {
+    //     return players.players.filter((p) => p.id !== playerId);
+    //   })
+    // );
+
+    this.getPlayers();
+    this.loadPlayers(this.itemsPerPage, this.page * this.itemsPerPage);
   }
 
   loadPlayers(limit: number, offset: number) {
@@ -38,6 +41,7 @@ export class PlayersComponent implements OnInit {
 
   pageChanged(event: PageChangedEvent) {
     this.page = event.page - 1;
+    this.getPlayers();
     this.loadPlayers(this.itemsPerPage, this.page * this.itemsPerPage);
   }
 
