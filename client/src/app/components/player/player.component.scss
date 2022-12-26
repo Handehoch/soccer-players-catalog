@@ -33,6 +33,20 @@
     transition: transform 0.3s linear, background-color 0.3s linear;
   }
 
+  &__form {
+    display: flex;
+    position: absolute;
+    top: 200px;
+  }
+
+  input[type='file'] {
+    color: transparent;
+  }
+
+  &__input {
+    max-width: 85px;
+  }
+
   &__avatar {
     width: 100%;
     height: 201px;
@@ -43,11 +57,19 @@
     &__avatar {
       height: 250px;
     }
+
+    &__form {
+      top: 249px;
+    }
   }
 
   @media (min-width: 768px) and (max-width: 991px) {
     &__avatar {
       height: 300px;
+    }
+
+    &__form {
+      top: 299px;
     }
   }
 
@@ -58,6 +80,10 @@
 
     &__avatar {
       height: 450px;
+    }
+
+    &__form {
+      top: 449px;
     }
   }
 
