@@ -31,6 +31,16 @@ export class PlayersService {
     });
   }
 
+  setAvatarByPlayerId(playerId: number, image: File) {
+    const formData = new FormData();
+    formData.append('image', image);
+
+    return this.httpService.post(
+      `${this.baseUrl}/api/players/${playerId}/avatar`,
+      formData
+    );
+  }
+
   getAvatarByPlayerId(avatarId: number) {
     return this.httpService.get(
       `${this.baseUrl}/api/players/${avatarId}/avatar`,

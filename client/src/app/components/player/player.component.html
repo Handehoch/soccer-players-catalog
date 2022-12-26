@@ -3,6 +3,12 @@
     <button class="card-button player__delete-button player__delete-button--bg" (click)="deletePlayer()"></button>
   </div>
   <img [src]="player.avatar" alt="Avatar" class="player__avatar">
+  <form method="post" target="_parent" [formGroup]="form" (ngSubmit)="setAvatar()">
+    <input type="file" name="image" id="image"
+           (change)="onFileSelected($event)"
+           [(ngModel)]="selectedFile">
+    <button type="submit">Upload</button>
+  </form>
   <h2 class="player__name">{{player.firstname}} {{player.lastname}}</h2>
   <div class="player__description">
     <ul class="player__info">

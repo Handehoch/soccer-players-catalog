@@ -9,7 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { PlayerCreationComponent } from './components/player-creation/player-creation.component';
 import { CreatePlayerFormComponent } from './components/create-player-form/create-player-form.component';
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { FooterComponent } from './components/footer/footer.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -33,6 +33,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
     PaginationModule,
+    FormsModule,
   ],
   providers: [
     {
