@@ -16,11 +16,7 @@ import { FilesModule } from '../files/files.module';
     ConfigModule.forRoot({ envFilePath: '.env' }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: parseInt(process.env.POSTGRES_PORT),
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
+      uri: 'postgres://rfpxgnnv:eG_bKGvqDtGR0ap3Q2QtyFhsyebZwwHz@hattie.db.elephantsql.com/rfpxgnnv',
       models: [Player, File],
       autoLoadModels: true,
       synchronize: true,
